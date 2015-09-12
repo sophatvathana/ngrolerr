@@ -1,0 +1,19 @@
+{
+  "name": "ngrolerr",
+  "version": "0.0.1",
+  "description": "ngRolerr CRUD API Store in cookie and Roles managing for ui-route Angularjs (#*****Developing*****#)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sophatvathana/ngrolerr.git"
+  },
+  "author": "sovathana <sovathana.phat@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sophatvathana/ngrolerr/issues"
+  },
+  "homepage": "https://github.com/sophatvathana/ngrolerr#readme"
+}
