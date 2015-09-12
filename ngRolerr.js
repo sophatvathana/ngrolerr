@@ -2,7 +2,7 @@
 * @Author: sovathana
 * @Date:   2015-09-10 15:20:46
 * @Last Modified by:   sovathana
-* @Last Modified time: 2015-09-13 00:07:32
+* @Last Modified time: 2015-09-13 00:31:12
 * @Email: sovathana.phat@gmail.com
 * @Facebook && Twitter : Sophatvathana
 * @Project: ngRolerr
@@ -17,14 +17,14 @@
     module.exports = factory(require('angular'));
   } else if (typeof define === 'function' && define.amd) {
     // AMD
-    define(['angular', 'angular-cookies'], function (angular, angular-cookies) {
-      return (window.ngRolerr = factory(angular, angular-cookies));
+    define(['angular'], function (angular) {
+      return (window.ngRolerr = factory(angular));
     });
   } else {
     // Global Variables
-    window.ngRolerr  = factory(window.angular, window.angular-cookies);
+    window.ngRolerr  = factory(window.angular);
   }
-}(this, function ngReact(React, angular) {
+}(this, function ngRolerr(angular) {
 	
 'use strict';
 angular.module('ngRolerr',['ngCookies'])
