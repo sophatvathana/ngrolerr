@@ -2,7 +2,7 @@
 * @Author: sovathana
 * @Date:   2015-09-10 15:20:46
 * @Last Modified by:   sovathana
-* @Last Modified time: 2015-09-13 12:04:20
+* @Last Modified time: 2015-09-13 12:25:41
 * @Email: sovathana.phat@gmail.com
 * @Facebook && Twitter : Sophatvathana
 * @Project: ngRolerr
@@ -186,7 +186,7 @@ Object.defineProperties(this, {
         var expireDate = new Date();
              expireDate.setDate(expireDate.getDate() + 1);
         if (identity)
-          $cookies.put("__rolerr", identity,{'expires': expireDate});
+           $cookies.put("__rolerr", identity,{'expires': expireDate});
         else $cookies.remove("__rolerr");
       },
 
