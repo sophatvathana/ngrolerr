@@ -2,7 +2,7 @@
 * @Author: sovathana
 * @Date:   2015-09-10 15:20:46
 * @Last Modified by:   sovathana
-* @Last Modified time: 2015-09-13 00:31:12
+* @Last Modified time: 2015-09-13 11:34:53
 * @Email: sovathana.phat@gmail.com
 * @Facebook && Twitter : Sophatvathana
 * @Project: ngRolerr
@@ -25,9 +25,9 @@
     window.ngRolerr  = factory(window.angular);
   }
 }(this, function ngRolerr(angular) {
-	
+  
 'use strict';
-angular.module('ngRolerr',['ngCookies'])
+angular.module('ngRolerr', ['ngCookies'])
  .constant('ngRolerrConfig', {
     rolesUrl: '',
     rolesSource: [],
@@ -38,32 +38,32 @@ angular.module('ngRolerr',['ngCookies'])
     tokenType: 'Bearer',
  })
  .provider('$rolerr',['ngRolerrConfig',function(config){
-   Object.defineProperties(this, {
+Object.defineProperties(this, {
        rolesUrl: {
           get: function() { return config.rolesUrl; },
           set: function(value) { config.rolesUrl = value; }
         },
        modeInterceptor: {
-       	  get: function() { return config.modeInterceptor; },
-       	  set: function(value) { config.modeInterceptor = value; }
+          get: function() { return config.modeInterceptor; },
+          set: function(value) { config.modeInterceptor = value; }
        },
        getUserUrl: {
-       	  get: function() { return config.getUserUrl; },
-       	  set: function(value) { config.getUserUrl = value; }
+          get: function() { return config.getUserUrl; },
+          set: function(value) { config.getUserUrl = value; }
        },
        getUrl: {
-       	  get: function() { return config.getUrl; },
-       	  set: function(value) { config.getUrl = value; }
-       	},
+          get: function() { return config.getUrl; },
+          set: function(value) { config.getUrl = value; }
+        },
        rolesSource: {
-       	  get: function() { return config.rolesSource; },
-       	  set: function(value) { config.rolesSource = value; }
+          get: function() { return config.rolesSource; },
+          set: function(value) { config.rolesSource = value; }
        },
 
        secret: {
-       	  get: function() { return config.secret; },
-       	  set: function(value) { config.secret = value; } 
-       	}
+          get: function() { return config.secret; },
+          set: function(value) { config.secret = value; } 
+        }
 
    });
 
@@ -71,74 +71,75 @@ angular.module('ngRolerr',['ngCookies'])
       var $rolerr = {};
 
       $rolerr.isTokenResolved = function() {
- 		return rolerr.isTokenResolved();
+    return rolerr.isTokenResolved();
       };
 
       $rolerr.isAuthenticated = function() {
-      	return rolerr.isAuthenticated();
+        return rolerr.isAuthenticated();
       };
 
       $rolerr.isInRole = function(role) {
-      	return rolerr.isInRole(role);
+        return rolerr.isInRole(role);
       };
 
       $rolerr.isInAnyRole = function(roles) {
- 		return rolerr.isInAnyRole(roles);
+    return rolerr.isInAnyRole(roles);
       };
 
       $rolerr.authenticate = function(identity) {
-      	return rolerr.authenticate(identity);
+        return rolerr.authenticate(identity);
       };
 
       $rolerr.identity = function(force) {
-      	return rolerr.identity(force);
+        return rolerr.identity(force);
       };
 
       $rolerr.authorize = function() {
-      	return authorizer.authorize();
+        return authorizer.authorize();
       };
 
       $rolerr.getUser = function() {
-      	return service.getUser();
+        return service.getUser();
       };
 
       $rolerr.getRoles = function() {
-      	return service.getRoles();
+        return service.getRoles();
       };
-
-
 
       return $rolerr;
    }];
  }])
- .factory('service',['$q', '$window', 'ngRolerrConfig', '$http', function($q, $window, config, $http){
+ .factory('service',['$q', 'ngRolerrConfig', '$http', function($q, config, $http){
 
     return {
        getRoles: function(){
-             var deferred = $q.defer();
+          var deferred = $q.defer();
           $http.get(config.rolesUrl).success(function(data){
-          	 deferred.resolve(data);
+             deferred.resolve(data);
           }).error(function(data) { deferred.reject(data); });
         return deferred.promise;
        },
 
        getUser: function(){
- 			var deferred = $q.defer();
- 			$http.get(config.userRole).success(function(data){
- 				deferred.resolve(data);
- 			}).error(function(data) { deferred.reject(data); });
+      var deferred = $q.defer();
+      $http.get(config.userRole).success(function(data){
+        deferred.resolve(data);
+      }).error(function(data) { deferred.reject(data); });
        },
 
        getData: function(){
-       		var deferred = $q.defer(); 
-       		$http.get(config.getUrl).success(function(data){
-       			deferred.resolve(data);
-       		}).error(function(data) { deferred.reject(data); });
+          var deferred = $q.defer(); 
+          $http.get(config.getUrl).success(function(data){
+            deferred.resolve(data);
+          }).error(function(data) { deferred.reject(data); });
        },
     }
  
  }])
- .factory('rolerr',['ngRolerrConfig','$q','$window','$timeout','$cookies',function(config, $q, $window, $timeout, $cookies) {
+ .factory('rolerr',['ngRolerrConfig',
+  '$q','$window',
+  '$timeout','$cookies',
+  function(config, $q, $window, $timeout, $cookies) {
     var _token = undefined,
       _authenticated = false,
         dataRoles = {};
@@ -182,6 +183,7 @@ angular.module('ngRolerr',['ngCookies'])
           $cookies.put("__rolerr", identity,{'expires': expireDate});
         else $cookies.remove("__rolerr");
       },
+
       identity: function(force) {
         var deferred = $q.defer();
 
@@ -198,100 +200,79 @@ angular.module('ngRolerr',['ngCookies'])
           _token =  $cookies.get("__rolerr");
           self.authenticate(_token);
           deferred.resolve(_token);
-        }, 100);
+        }, 1000);
 
         return deferred.promise;
       }
     };
   }])
 .factory('shareservice', [ 'ngRolerrConfig', '$q', 'rolerr', 'service', function( config, $q, rolerr, service){
-	 var isTrue = false;
-	   this.arrObj = {roles:[]};
-	 
+   
    Array.prototype.equals = function (arr) {
       if (!arr) return false;
       if (this === null || arr === null) return false;
-  	  if (this !== this && arr !== arr) return true;
-
-    /*if (this.length != array.length)
-        return false;*/
+      if (this !== this && arr !== arr) return true;
 
     for(var i = 0, l=this.length; i < l; i++) {
          
         for(var j = 0, l=arr.length; j < l; j++){
-        //if (this[i] instanceof Array && array[j] instanceof Array) {
-            
+  
             if (this[i] === arr[j]){
                 return true;
                 break;       
             }
-        //}           
-        //else if (this[i] == array[j]) { 
-            
-          //  return true;   
-        //}
-        }           
+        }                     
     }       
       return false;
 } 
-	return  {
-		isInRole: function(role) {
-      	//if (expect(config.rolesUrl) 
-        //if (!_authenticated || !_token) return false;
-       
-    	//return false;
-      },
-        checkDataRole: function(roles) {
-      	 var dataObj={}
-        if (!rolerr.isAuthenticated || !rolerr.identity) return false;
-          service.getRoles().then(function(data){
-          	 var token = jwt.encode(data, config.secret);
-          }) 
-      },
+  return  {
 
-       	checkRolesSource: function(getrr, roles) {
-       		   	var dataArr=[];
-       		//var dataObj =[],
-       		   // dataSource =config.rolesSource;
-       		//if (!config.rolesSource || config.rolesSource == 'undefined') return false;
-       		if( !rolerr.isAuthenticated || !rolerr.identity) return false;
-       		//for(var i=0, l=dataSource.length; i<l; i++){
-       			//dataObj.push(dataSource[i].name);
-       		//}
-       		 for(var i=0; i<getrr.roles.length;i++)
+        checkRolesSource: function(getrr, roles) {
+              var dataArr=[];
+              console.log(rolerr.isAuthenticated())
+          //var dataObj =[],
+             // dataSource =config.rolesSource;
+          //if (!config.rolesSource || config.rolesSource == 'undefined') return false;
+          if( !rolerr.isAuthenticated() || !rolerr.identity) return false;
+          //for(var i=0, l=dataSource.length; i<l; i++){
+            //dataObj.push(dataSource[i].name);
+          //}
+           for(var i=0; i<getrr.roles.length;i++)
           dataArr.push(getrr.roles[i].name);
            return roles.equals(dataArr);
-       	}
-	};
+        }
+  };
 }])
-.factory('authorizer', ['service','shareservice','$windowScope', '$state', 'rolerr',
-  function(service,shareservice, $windowScope, $state, rolerr) {
+.factory('authorizer', ['service','shareservice','$rootScope', '$state', 'rolerr',
+  function(service,shareservice, $rootScope, $state, rolerr) {
     return {
-      authorize: function(getroles) {
-        //return  //rolerr.identity()
-           //.then(function() {
+      authorize: function() {
+         return   rolerr.identity()
+            .then(function() {
+            console.log('Not '+rolerr.isAuthenticated())
           if (!rolerr.isAuthenticated()){
-       	    	$windowScope.returnToState = $windowScope.toState;
-                $windowScope.returnToStateParams = $windowScope.toStateParams;
-                $state.go($windowScope.toState.data.failedTo);
+                // alert("Not Authenticated")
+                $rootScope.returnToState = $rootScope.toState;
+                $rootScope.returnToStateParams = $rootScope.toStateParams;
+                $state.go($rootScope.toState.data.failedTo);
                 console.log('Not Login ');
-       	    }else{
-         return service.getRoles().then(function(data){
-             if ($windowScope.toState.data.roles && $windowScope.toState.data.roles.length > 0 && !shareservice.checkRolesSource(data, $windowScope.toState.data.roles)) {
-                 $state.go($windowScope.toState.data.deniedTo); 
+           }else{
+            service.getRoles().then(function(data){
+             if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !shareservice.checkRolesSource(data, $rootScope.toState.data.roles)) {
+                 $state.go($rootScope.toState.data.deniedTo); 
              }
            }, function(data) {
                     console.log('data retrieval failed.')
                 });
      }
-           //});
+           });
       }
     };
   }
 ])
 /*.factory('rolerrIntercepter', ['$q','$cookies', 'ngRolerrConfig', 'rolerr', 
-	function($q, $cookies, config, rolerr){
-	return {
+  function($q, $cookies, config, rolerr){
+  return {
         request: function(request) {
          // if (request.skipAuthorization) {
            // return request;
@@ -311,8 +292,8 @@ angular.module('ngRolerr',['ngCookies'])
 }])*/
 .config(['$httpProvider', function($httpProvider) {
       $httpProvider.interceptors.push(['$q','$cookies', 'ngRolerrConfig', 'rolerr', 
-	function($q, $cookies, config, rolerr){
-	return {
+  function($q, $cookies, config, rolerr){
+  return {
         request: function(request) {
          // if (request.skipAuthorization) {
            // return request;
@@ -322,7 +303,7 @@ angular.module('ngRolerr',['ngCookies'])
              var token =  $cookies.get('__rolerr');
 
                 token =config.header && config.tokenType ? config.tokenType + ' ' + token:
-                		$cookies.get('__rolerr');
+                    $cookies.get('__rolerr');
 
               request.headers[config.header] = token;
                return request || $q.when(request);
@@ -334,6 +315,7 @@ angular.module('ngRolerr',['ngCookies'])
             return $q.reject(response);
           }
         };
-	}]);
+  }]);
 }]);
-}));
+
+ }));
