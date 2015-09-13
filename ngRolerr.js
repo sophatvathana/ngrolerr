@@ -2,7 +2,7 @@
 * @Author: sovathana
 * @Date:   2015-09-10 15:20:46
 * @Last Modified by:   sovathana
-* @Last Modified time: 2015-09-13 11:34:53
+* @Last Modified time: 2015-09-13 12:25:41
 * @Email: sovathana.phat@gmail.com
 * @Facebook && Twitter : Sophatvathana
 * @Project: ngRolerr
@@ -30,6 +30,7 @@
 angular.module('ngRolerr', ['ngCookies'])
  .constant('ngRolerrConfig', {
     rolesUrl: '',
+    storageType: '$cookies',
     rolesSource: [],
     getUserUrl: '',
     getUrl: '',
@@ -63,7 +64,12 @@ Object.defineProperties(this, {
        secret: {
           get: function() { return config.secret; },
           set: function(value) { config.secret = value; } 
-        }
+        },
+
+       storageType: {
+          get: function() { return config.storageType; },
+          set: function(value) { config.storageType =  value} 
+       }
 
    });
 
@@ -180,7 +186,7 @@ Object.defineProperties(this, {
         var expireDate = new Date();
              expireDate.setDate(expireDate.getDate() + 1);
         if (identity)
-          $cookies.put("__rolerr", identity,{'expires': expireDate});
+           $cookies.put("__rolerr", identity,{'expires': expireDate});
         else $cookies.remove("__rolerr");
       },
 
@@ -196,11 +202,11 @@ Object.defineProperties(this, {
         }
 
         var self = this;
-        $timeout(function() {
+        //$timeout(function() {
           _token =  $cookies.get("__rolerr");
           self.authenticate(_token);
           deferred.resolve(_token);
-        }, 1000);
+       // }, 1000);
 
         return deferred.promise;
       }
