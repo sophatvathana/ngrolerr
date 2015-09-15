@@ -4,7 +4,7 @@
   "description": "Authentication Store in cookie localstorage or sessionStorage and Roles managing for ui-route Angularjs (#*****Developing*****#)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
