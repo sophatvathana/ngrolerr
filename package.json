@@ -1,6 +1,6 @@
 {
   "name": "ngrolerr",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Authentication Store in cookie localstorage or sessionStorage and Roles managing for ui-route Angularjs (#*****Developing*****#)",
   "main": "index.js",
   "scripts": {
