@@ -1,7 +1,7 @@
 {
   "name": "ngrolerr",
-  "version": "0.0.2-beta.1",
-  "description": "ngRolerr CRUD API Store in cookie and Roles managing for ui-route Angularjs (#*****Developing*****#)",
+  "version": "0.0.2-beta.2",
+  "description": "Authentication Store in cookie localstorage or sessionStorage and Roles managing for ui-route Angularjs (#*****Developing*****#)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,21 @@
     "url": "http://twitter.com/sophatvathana"
   },
   "license": "MIT",
+  "tags": [
+    "authentication",
+    "login",
+    "token",
+    "jwt",
+    "angularjs",
+    "angular",
+    "auth",
+    "sign-in",
+    "twitch",
+    "Roles",
+    "ui-route",
+    "Role",
+    "Laravel"
+  ],
   "bugs": {
     "url": "https://github.com/sophatvathana/ngrolerr/issues"
   },
