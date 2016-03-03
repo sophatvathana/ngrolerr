@@ -1,5 +1,4 @@
 # [ngRolerr](https://github.com/sophatvathana/ngRolerr/) 
-<h4> Developing mode </h4>
 i'm happy to sharing this module. The reason that i created this module because , i working on it with Laravel and angular as frontend.
 # ngRolerr is very simple module of <a href="//angularjs.org" >Angular Js</a> to use for rest API with anuglar interceptor. Have built-in signin and signup. And you also can use Role manager for filter your UI-router as Admin or Online or ..etc.. Roles 
 
