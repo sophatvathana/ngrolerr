@@ -1,7 +1,7 @@
 {
   "name": "ngrolerr",
-  "version": "0.1.0",
-  "description": "Authentication Store in cookie localstorage or sessionStorage and Roles managing for ui-route Angularjs (#*****Developing*****#)",
+  "version": "0.1.1",
+  "description": "Authentication Store in cookie localstorage or sessionStorage and Roles managing for ui-route Angularjs",
   "main": "index.js",
   "scripts": {
     "test": "karma start"
