@@ -17,8 +17,9 @@ module.exports = function(config) {
     files: [
       'tests/bundles/angular/angular.js',
       'tests/bundles/angular/angular-mocks.js',
-      'lib/*.js',
-      'tests/*Spec.js'
+      'tests/bundles/angular/angular-ui-router.min.js',
+      'lib/ngRolerr.js',
+      'tests/lib/*.spec.js'
     ],
 
 
